@@ -230,6 +230,8 @@ def path(source, data_dir,  # noqa: C901
             dstore_path = os.path.join(dstore_path, f"epacems{year}")
     elif source == 'epaipm':
         dstore_path = os.path.join(data_dir, 'epa', 'ipm', 'epaipm')
+    elif source == 'nrelatb':
+        dstore_path = os.path.join(data_dir, 'nrel', 'atb', 'nrelatb')
     else:
         # we should never ever get here because of the assert statement.
         raise AssertionError(f"Bad data source '{source}' requested.")
@@ -357,6 +359,12 @@ def download(source, year, states, data_dir):
         # code the url and temp files than use provided functions.
         fns = pc.epaipm_url_ext.values()
         base_url = pc.base_data_urls['epaipm']
+
+        src_urls = [f'{base_url}/{f}' for f in fns]
+        tmp_files = [os.path.join(tmp_dir, f) for f in fns]
+    elif source == 'nrelatb':
+        fns = pc.nrelatb_url_ext.values()
+        base_url = pc.base_data_urls['nrelatb']
 
         src_urls = [f'{base_url}/{f}' for f in fns]
         tmp_files = [os.path.join(tmp_dir, f) for f in fns]
