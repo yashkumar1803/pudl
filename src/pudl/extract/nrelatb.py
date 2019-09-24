@@ -1,6 +1,4 @@
-"""
-Retrieve data from NREL's Annual Technology Baseline (ATB) Data.
-"""
+"""Retrieve data from NREL's Annual Technology Baseline (ATB) Data."""
 
 import logging
 from pathlib import Path
@@ -32,7 +30,7 @@ def get_nrelatb_name(file, data_dir):
     # pattern = pc.files_dict_nrelatb[file]
     # name = sorted(epaipm_dir.glob(pattern))[0]
 
-    return '/'.join([nrelatb_dir, file])
+    return Path(nrelatb_dir, file)
 
 
 def get_nrelatb_file(filename, read_file_args, data_dir):
@@ -65,7 +63,7 @@ def get_nrelatb_file(filename, read_file_args, data_dir):
     return nrelatb_file
 
 
-def create_dfs_nrelatb(files, data_dir):
+def create_dfs_nrelatb(files, nrelatb_years, data_dir):
     """Makes dictionary of pages (keys) to dataframes (values) for nrelatb tabs.
 
     Args:
@@ -93,7 +91,7 @@ def create_dfs_nrelatb(files, data_dir):
     return nrelatb_dfs
 
 
-def extract(data_dir):
+def extract(nrelatb_years, data_dir):
     """Extracts data from ATB files.
 
     Args:
@@ -109,8 +107,8 @@ def extract(data_dir):
 
     logger.info('Beginning ETL for NREL ATB.')
 
-    nrelatb_files = pc.nrel_atb_files
-
     nrelatb_raw_dfs = create_dfs_nrelatb(
-        files=nrelatb_files, data_dir=data_dir)
+        files=pc.nrelatb_files,
+        nrelatb_years=nrelatb_years,
+        data_dir=data_dir)
     return nrelatb_raw_dfs

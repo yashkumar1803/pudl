@@ -2207,13 +2207,16 @@ nrelatb_url_ext = {
     'technology_costs_nrelatb': '2019-ATB-data-summary.zip'
 }
 
-nrel_atb_files = {
+nrelatb_files = {
     'atb_market_20': '2019-ATB-Market-20.csv',
     'atb_market_30': '2019-ATB-Market-30.csv',
     'atb_rd_20': '2019-ATB-RD-20.csv',
     'atb_rd_30': '2019-ATB-RD-30.csv',
     'atb_rd_life': '2019-ATB-RD-Life.csv',
 }
+
+
+nrelatb_pudl_tables = ('technology_costs_nrelatb')
 
 
 glue_pudl_tables = ('plants_eia', 'plants_ferc', 'plants', 'utilities_eia',

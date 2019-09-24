@@ -3,6 +3,7 @@
 import logging
 
 import pandas as pd
+
 import pudl.constants as pc
 
 logger = logging.getLogger(__name__)
@@ -23,7 +24,7 @@ def transform(nrelatb_raw_dfs, nrelatb_tables=pc.nrelatb_pudl_tables):
         ATB(keys) correspond to normalized DataFrames of values from
         that table(values)
     """
-    nrelatb_transformed_dfs = pd.DataFrame()
+    nrelatb_transformed_df = pd.DataFrame()
 
     for tablename, table in nrelatb_raw_dfs.items():
         logger.info(f"Transforming raw NREL ATB DataFrames for {tablename}")
@@ -31,6 +32,6 @@ def transform(nrelatb_raw_dfs, nrelatb_tables=pc.nrelatb_pudl_tables):
         table["maturity"] = mkt
         table["cap_recovery_period"] = financial
 
-        pd.concat([nrelatb_transformed_dfs, table])
+        pd.concat([nrelatb_transformed_df, table])
 
-    return nrelatb_transformed_dfs
+    return {'technology_costs_nrelatb': nrelatb_transformed_df}
